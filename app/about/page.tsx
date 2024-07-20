@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import { genPageMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "About"
-};
+export const metadata = genPageMetadata({
+  title: "About",
+});
 
 export default function AboutPage() {
   return <p>This is the about page</p>;
