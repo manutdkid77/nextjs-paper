@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Head() {
   return (
     <head>
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
