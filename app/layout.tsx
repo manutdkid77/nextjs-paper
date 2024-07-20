@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import siteMetadata from "@/data/siteMetadata";
+import Head from "@/app/components/Head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
     images: [siteMetadata.socialBanner],
     locale: siteMetadata.locale,
     type: "website",
+  },
+  alternates: {
+    canonical: "./",
   },
   robots: {
     index: true,
@@ -46,6 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head />
       <body className={inter.className}>{children}</body>
     </html>
   );

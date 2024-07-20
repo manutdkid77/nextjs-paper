@@ -28,6 +28,9 @@ export function genPageMetadata({
       locale: siteMetadata.locale,
       type: "website",
     },
+    alternates: {
+      canonical: "./",
+    },
     twitter: {
       title,
       card: "summary_large_image",
