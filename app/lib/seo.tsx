@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import siteMetadata from "@/data/siteMetadata";
 
 interface PageSEOProps {
   title: string;
@@ -13,16 +14,18 @@ export function genPageMetadata({
   image,
   ...rest
 }: PageSEOProps): Metadata {
+  const pageTitle = title || siteMetadata.title;
+
   return {
-    title,
-    description,
+    title: pageTitle,
+    description: description || siteMetadata.description,
     openGraph: {
-      title,
+      title: pageTitle,
       description,
       url: "./",
-      siteName: title,
-      images: image ? [image] : [],
-      locale: "en_US",
+      siteName: siteMetadata.title,
+      images: image ? [image] : [siteMetadata.socialBanner],
+      locale: siteMetadata.locale,
       type: "website",
     },
     twitter: {
