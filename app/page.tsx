@@ -4,7 +4,7 @@ import siteMetadata from "@/data/siteMetadata";
 export default function Home() {
   return (
     <Avatar
-      title={siteMetadata.title}
+      title={siteMetadata.avatarTitle}
       description={siteMetadata.description}
       avatarUrl={siteMetadata.avatarUrl}
     ></Avatar>

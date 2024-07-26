@@ -18,6 +18,7 @@ const siteMetadata = {
   threads: "https://www.threads.net",
   instagram: "https://www.instagram.com",
   locale: "en-GB",
+  avatarTitle: "Nathaniel Nunes",
   avatarUrl: "https://avatars.githubusercontent.com/u/14297705",
 };
 
