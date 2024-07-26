@@ -21,6 +21,7 @@ const siteMetadata = {
   avatarTitle: "Nathaniel Nunes",
   avatarUrl: "https://avatars.githubusercontent.com/u/14297705",
   poweredByText: "Powered by Next.js",
+  poweredByUrl: "https://nextjs.org/",
 };
 
 module.exports = siteMetadata;

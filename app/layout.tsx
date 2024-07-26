@@ -63,6 +63,7 @@ export default function RootLayout({
             title={siteMetadata.title}
             poweredByText={siteMetadata.poweredByText}
             siteRepo={siteMetadata.siteRepo}
+            poweredByUrl={siteMetadata.poweredByUrl}
           />
         </Providers>
       </body>

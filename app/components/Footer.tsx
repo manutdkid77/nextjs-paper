@@ -3,6 +3,7 @@ interface FooterValue {
   title: string;
   siteRepo?: string;
   poweredByText?: string;
+  poweredByUrl?: string;
 }
 
 export default function Footer(footerValue: FooterValue) {
@@ -14,10 +15,10 @@ export default function Footer(footerValue: FooterValue) {
           {footerValue.title}
         </a>
       </div>
-      {footerValue.poweredByText && (
+      {footerValue.poweredByText && footerValue.poweredByUrl && (
         <a
           className="link mx-6"
-          href="https://gohugo.io/"
+          href={footerValue.poweredByUrl}
           rel="noopener"
           target="_blank"
         >
