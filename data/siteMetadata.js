@@ -20,6 +20,7 @@ const siteMetadata = {
   locale: "en-GB",
   avatarTitle: "Nathaniel Nunes",
   avatarUrl: "https://avatars.githubusercontent.com/u/14297705",
+  poweredByText: "Powered by Next.js",
 };
 
 module.exports = siteMetadata;

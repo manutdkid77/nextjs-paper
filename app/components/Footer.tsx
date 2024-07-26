@@ -1,6 +1,8 @@
 interface FooterValue {
   siteUrl: string;
   title: string;
+  siteRepo?: string;
+  poweredByText?: string;
 }
 
 export default function Footer(footerValue: FooterValue) {
@@ -12,23 +14,27 @@ export default function Footer(footerValue: FooterValue) {
           {footerValue.title}
         </a>
       </div>
-      <a
-        className="link mx-6"
-        href="https://gohugo.io/"
-        rel="noopener"
-        target="_blank"
-      >
-        Powered by Next.js
-      </a>
+      {footerValue.poweredByText && (
+        <a
+          className="link mx-6"
+          href="https://gohugo.io/"
+          rel="noopener"
+          target="_blank"
+        >
+          {footerValue.poweredByText}
+        </a>
+      )}
       ️
-      <a
-        className="link"
-        href="https://github.com/nanxiaobei/hugo-paper"
-        rel="noopener"
-        target="_blank"
-      >
-        ✎ Paper
-      </a>
+      {footerValue.siteRepo && (
+        <a
+          className="link"
+          href={footerValue.siteRepo}
+          rel="noopener"
+          target="_blank"
+        >
+          ✎ Paper
+        </a>
+      )}
     </footer>
   );
 }

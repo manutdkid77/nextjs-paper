@@ -58,7 +58,12 @@ export default function RootLayout({
           <main className="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert">
             {children}
           </main>
-          <Footer siteUrl={siteMetadata.siteUrl} title={siteMetadata.title} />
+          <Footer
+            siteUrl={siteMetadata.siteUrl}
+            title={siteMetadata.title}
+            poweredByText={siteMetadata.poweredByText}
+            siteRepo={siteMetadata.siteRepo}
+          />
         </Providers>
       </body>
     </html>
