@@ -1,5 +1,12 @@
-import Image from "next/image";
+import Avatar from "./components/Avatar";
+import siteMetadata from "@/data/siteMetadata";
 
 export default function Home() {
-  return <></>;
+  return (
+    <Avatar
+      title={siteMetadata.title}
+      description={siteMetadata.description}
+      avatarUrl={siteMetadata.avatarUrl}
+    ></Avatar>
+  );
 }
