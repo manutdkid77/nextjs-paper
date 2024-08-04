@@ -39,7 +39,13 @@ export function getAllContentFiles({
     };
   });
 
-  return contentFiles;
+  const contentFilesSortByDate = contentFiles.sort((a, b) => {
+    const beforeDate = new Date(a.frontmatter.date).valueOf();
+    const afterDate = new Date(b.frontmatter.date).valueOf();
+    return afterDate - beforeDate;
+  });
+
+  return contentFilesSortByDate;
 }
 
 export function getContentFile({
@@ -47,31 +53,25 @@ export function getContentFile({
   slug,
   slugPathPrefix,
 }: getContentFileProps) {
-  const files = fs.readdirSync(sourceFolderPath);
+  const files = getAllContentFiles({ sourceFolderPath, slugPathPrefix });
 
-  const fileIndex = files.findIndex((fileName) => fileName === `${slug}.md`);
+  const fileIndex = files.findIndex(
+    (x) => x.slug === `${slugPathPrefix}/${slug}`
+  );
 
   let previousPage, nextPage;
-  const prevFileName = files[fileIndex - 1];
-  const nextFileName = files[fileIndex + 1];
+  const previousFile = files[fileIndex - 1];
+  const nextFile = files[fileIndex + 1];
 
-  if (prevFileName) {
-    const previousFile = fs.readFileSync(
-      `${sourceFolderPath}/${prevFileName}`,
-      "utf-8"
-    );
-    const { data: frontmatter } = matter(previousFile);
-    const slug = `${slugPathPrefix}/${prevFileName.replace(".md", "")}`;
-    previousPage = { slug, title: frontmatter.title };
+  if (previousFile) {
+    previousFile.slug;
+    previousPage = {
+      slug: previousFile.slug,
+      title: previousFile.frontmatter.title,
+    };
   }
-  if (nextFileName) {
-    const nextFIle = fs.readFileSync(
-      `${sourceFolderPath}/${nextFileName}`,
-      "utf-8"
-    );
-    const { data: frontmatter } = matter(nextFIle);
-    const slug = `${slugPathPrefix}/${nextFileName.replace(".md", "")}`;
-    nextPage = { slug, title: frontmatter.title };
+  if (nextFile) {
+    nextPage = { slug: nextFile.slug, title: nextFile.frontmatter.title };
   }
 
   const file = fs.readFileSync(`${sourceFolderPath}/${slug}.md`, "utf-8");

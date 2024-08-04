@@ -31,7 +31,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     slug: params.slug,
     slugPathPrefix: "/blog",
   });
-  console.log(frontmatter.tags);
 
   const htmlContent = convertMarkdownToHtml({
     content,
