@@ -15,7 +15,6 @@ export default function Home() {
         description={siteMetadata.description}
         avatarUrl={siteMetadata.avatarUrl}
       ></Avatar>
-      <BlogList contentFiles={contentFiles} />
     </>
   );
 }
