@@ -1,3 +1,4 @@
+import PostNavigation from "@/app/components/PostNavigation";
 import TagList from "@/app/components/TagList";
 import {
   getContentFile,
@@ -12,7 +13,6 @@ export async function generateMetadata({
   const { frontmatter } = getContentFile({
     sourceFolderPath: "data/blogPosts",
     slug: params.slug,
-    fileExtension: "md",
   });
   return {
     title: frontmatter.title,
@@ -26,10 +26,10 @@ export async function generateMetadata({
 }
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content } = getContentFile({
+  const { frontmatter, content, previousPage, nextPage } = getContentFile({
     sourceFolderPath: "data/blogPosts",
     slug: params.slug,
-    fileExtension: "md",
+    slugPathPrefix: "/blog",
   });
   console.log(frontmatter.tags);
 
@@ -53,6 +53,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       {frontmatter.tags && frontmatter.tags.length > 0 && (
         <TagList tags={frontmatter.tags} />
       )}
+      <PostNavigation previousPage={previousPage} nextPage={nextPage} />
     </article>
   );
 }

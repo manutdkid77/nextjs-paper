@@ -11,7 +11,7 @@ interface getAllContentFilesProps {
 interface getContentFileProps {
   sourceFolderPath: string;
   slug: string;
-  fileExtension: string;
+  slugPathPrefix?: string;
 }
 
 interface markdownToHtmlProps {
@@ -32,7 +32,7 @@ export function getAllContentFiles({
       `${sourceFolderPath}/${fileName}`,
       "utf-8"
     );
-    const { data: frontmatter, content } = matter(readFile);
+    const { data: frontmatter } = matter(readFile);
     return {
       slug,
       frontmatter,
@@ -45,15 +45,46 @@ export function getAllContentFiles({
 export function getContentFile({
   sourceFolderPath,
   slug,
-  fileExtension,
+  slugPathPrefix,
 }: getContentFileProps) {
-  const file = fs.readFileSync(`${sourceFolderPath}/${slug}.${fileExtension}`);
+  const files = fs.readdirSync(sourceFolderPath);
+
+  const fileIndex = files.findIndex((fileName) => fileName === `${slug}.md`);
+
+  let previousPage, nextPage;
+  const prevFileName = files[fileIndex - 1];
+  const nextFileName = files[fileIndex + 1];
+
+  if (prevFileName) {
+    const previousFile = fs.readFileSync(
+      `${sourceFolderPath}/${prevFileName}`,
+      "utf-8"
+    );
+    const { data: frontmatter } = matter(previousFile);
+    const slug = `${slugPathPrefix}/${prevFileName.replace(".md", "")}`;
+    previousPage = { slug, title: frontmatter.title };
+  }
+  if (nextFileName) {
+    const nextFIle = fs.readFileSync(
+      `${sourceFolderPath}/${nextFileName}`,
+      "utf-8"
+    );
+    const { data: frontmatter } = matter(nextFIle);
+    const slug = `${slugPathPrefix}/${nextFileName.replace(".md", "")}`;
+    nextPage = { slug, title: frontmatter.title };
+  }
+
+  const file = fs.readFileSync(`${sourceFolderPath}/${slug}.md`, "utf-8");
 
   const { data: frontmatter, content } = matter(file);
-  return {
+  let fileContent = {
     frontmatter,
     content,
+    previousPage,
+    nextPage,
   };
+
+  return fileContent;
 }
 
 export function convertMarkdownToHtml({

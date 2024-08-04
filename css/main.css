@@ -603,7 +603,6 @@ h3 {
 
 .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   color: var(--tw-prose-links);
-  text-decoration: underline;
   font-weight: 500;
 }
 
