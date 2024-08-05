@@ -50,7 +50,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
 
       <section dangerouslySetInnerHTML={{ __html: htmlContent }}></section>
       {frontmatter.tags && frontmatter.tags.length > 0 && (
-        <TagList tags={frontmatter.tags} />
+        <TagList tags={frontmatter.tags} tagUrlPrefix="/blog/tags" />
       )}
       <PostNavigation previousPage={previousPage} nextPage={nextPage} />
     </article>

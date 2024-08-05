@@ -19,6 +19,16 @@ interface markdownToHtmlProps {
   allowDangerousHtml?: boolean;
 }
 
+interface getAllContentFilesByTagProps {
+  tag: string;
+  sourceFolderPath: string;
+  slugPathPrefix?: string;
+}
+
+interface getAllTagsProps {
+  sourceFolderPath: string;
+}
+
 export function getAllContentFiles({
   sourceFolderPath,
   slugPathPrefix,
@@ -96,4 +106,70 @@ export function convertMarkdownToHtml({
     extensions: [gfm()],
     htmlExtensions: [gfmHtml()],
   });
+}
+
+export function getAllContentFilesByTag({
+  tag,
+  sourceFolderPath,
+  slugPathPrefix,
+}: getAllContentFilesByTagProps) {
+  const files = fs.readdirSync(sourceFolderPath);
+
+  const contentFiles = files.map((fileName) => {
+    let slug = fileName.replace(".md", "");
+    if (slugPathPrefix) slug = `${slugPathPrefix}/${slug}`;
+    const readFile = fs.readFileSync(
+      `${sourceFolderPath}/${fileName}`,
+      "utf-8"
+    );
+    const { data: frontmatter } = matter(readFile);
+    return {
+      slug,
+      frontmatter,
+    };
+  });
+
+  let contentFilesSortByDate = contentFiles.sort((a, b) => {
+    const beforeDate = new Date(a.frontmatter.date).valueOf();
+    const afterDate = new Date(b.frontmatter.date).valueOf();
+    return afterDate - beforeDate;
+  });
+
+  tag = tag.toLocaleLowerCase().trim();
+
+  contentFilesSortByDate = contentFilesSortByDate.filter(
+    (x) =>
+      x.frontmatter.tags &&
+      x.frontmatter.tags.some(
+        (y: string) => y.toLocaleLowerCase().trim() == tag
+      )
+  );
+
+  return contentFilesSortByDate;
+}
+
+export function getAllTags({ sourceFolderPath }: getAllTagsProps) {
+  const files = fs.readdirSync(sourceFolderPath);
+
+  const contentFiles = files.map((fileName) => {
+    const readFile = fs.readFileSync(
+      `${sourceFolderPath}/${fileName}`,
+      "utf-8"
+    );
+    const { data: frontmatter } = matter(readFile);
+    return { frontmatter };
+  });
+
+  let distinctTags: Array<string> = [];
+
+  for (let i = 0; i < contentFiles.length; i++) {
+    let tags: Array<string> = contentFiles[i].frontmatter.tags;
+    for (let j = 0; j < tags.length; j++) {
+      const tag = tags[j];
+      const tagPresent = distinctTags.some((x) => x === tag);
+      if (!tagPresent) distinctTags.push(tag);
+    }
+  }
+
+  return distinctTags;
 }
