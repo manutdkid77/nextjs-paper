@@ -18,5 +18,10 @@ export default function Tag({ params }: { params: { tag: string } }) {
     tag: params.tag,
   });
 
-  return <BlogList contentFiles={allContentFiles} />;
+  return (
+    <>
+      <h1 className="mb-14">{`#${params.tag}`}</h1>
+      <BlogList contentFiles={allContentFiles} />
+    </>
+  );
 }
