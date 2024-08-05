@@ -11,6 +11,21 @@ export const generateStaticParams = async () => {
   return paths;
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { tag: string };
+}) {
+  const tagName = params.tag;
+  return {
+    title: tagName,
+    openGraph: {
+      title: tagName,
+      url: `/blog/tags/${tagName}`,
+    },
+  };
+}
+
 export default function Tag({ params }: { params: { tag: string } }) {
   const allContentFiles = getAllContentFilesByTag({
     sourceFolderPath: "data/blogPosts",

@@ -19,6 +19,22 @@ export const generateStaticParams = async () => {
   return paths;
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { page: string };
+}) {
+  const pageNumber = params.page;
+  const title = `Blog Page ${pageNumber}`;
+  return {
+    title: title,
+    openGraph: {
+      title: title,
+      url: `/blog/page/${pageNumber}`,
+    },
+  };
+}
+
 export default function Page({ params }: { params: { page: string } }) {
   const pageNumber = parseInt(params.page);
 
