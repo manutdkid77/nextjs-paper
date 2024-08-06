@@ -1,3 +1,7 @@
+---
+title: "About"
+---
+
 Hello, welcome to next-js Paper.
 
 While learning nextjs, I wanted to build a small website from scratch using the concepts I had learnt.
