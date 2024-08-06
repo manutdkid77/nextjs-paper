@@ -11,7 +11,7 @@ const siteMetadata = {
   socialBanner: "",
   locale: "en-GB",
   avatarTitle: "Nathaniel Nunes",
-  avatarUrl: "https://avatars.githubusercontent.com/u/14297705",
+  avatarUrl: "https://2.gravatar.com/avatar/b8f525a212961b05002b4799d9512e346763de02ff70d28fe8bbe9004eb054f0?size=256",
   poweredByText: "Powered by Next.js",
   poweredByUrl: "https://nextjs.org/",
 };
