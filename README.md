@@ -45,7 +45,6 @@ pnpm dev
 ## Features
 
 - Next.js with Typescript
-- [Contentlayer](https://www.contentlayer.dev/) to manage content logic
 - [Tailwind CSS](https://tailwindcss.com/blog/tailwindcss-v3)
 - Frontmatter parsing using [gray-matter](https://github.com/jonschlinkert/gray-matter)
 - Markdown to html using [micromark](https://github.com/micromark/micromark) and GitHub flavoured markdown using [micromark-extension-gfm](https://github.com/micromark/micromark-extension-gfm)
