@@ -2,6 +2,7 @@ import BlogList from "@/app/components/BlogList";
 import Pagination from "@/app/components/Pagination";
 import { getAllContentFiles } from "@/app/lib/markdownParser";
 import { generatePaginationFields } from "@/app/lib/paginationHelpers";
+import { notFound } from "next/navigation";
 
 const POSTS_PER_PAGE = 5;
 
@@ -45,6 +46,8 @@ export default function Page({ params }: { params: { page: string } }) {
       allContentFiles,
       urlPathPrefix: "/blog/page",
     });
+
+  if (contentFiles.length === 0) return notFound();
 
   return (
     <>

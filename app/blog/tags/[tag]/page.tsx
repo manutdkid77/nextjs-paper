@@ -1,5 +1,6 @@
 import BlogList from "@/app/components/BlogList";
 import { getAllContentFilesByTag, getAllTags } from "@/app/lib/markdownParser";
+import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
   //generate individual tag pages at build time
@@ -32,6 +33,8 @@ export default function Tag({ params }: { params: { tag: string } }) {
     slugPathPrefix: "/blog",
     tag: params.tag,
   });
+
+  if (allContentFiles.length === 0) return notFound();
 
   return (
     <>
