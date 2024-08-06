@@ -3,6 +3,7 @@ import TagList from "@/app/components/TagList";
 import {
   getContentFile,
   convertMarkdownToHtml,
+  getAllContentFiles,
 } from "@/app/lib/markdownParser";
 
 export async function generateMetadata({
@@ -24,6 +25,15 @@ export async function generateMetadata({
     },
   };
 }
+
+export const generateStaticParams = async () => {
+  const contentFiles = getAllContentFiles({
+    sourceFolderPath: "data/blogPosts",
+  });
+  //generate blog pages at build time
+  const pages = contentFiles.map((x) => ({ slug: x.slug }));
+  return pages;
+};
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const { frontmatter, content, previousPage, nextPage } = getContentFile({
