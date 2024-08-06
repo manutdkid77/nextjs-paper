@@ -75,6 +75,14 @@ pnpm dev
 
 `next.config.mjs` - configuration related to Next.js.
 
+## Guides followed
+Below are some of the helpful guides and resources I followed while learning
+* [Next.JS Learn](https://nextjs.org/learn)
+* [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)
+* [Creating a markdown powered blog](https://daily-dev-tips.com/posts/creating-a-markdown-blog-powered-by-nextjs-in-under-an-hour/)
+* [Sorting markdown files from frontmatter](https://gist.github.com/ademilter/5a5085585bfc80d024b0b26003b4b464)
+* [Creating a custom 404 page in Next.JS](https://maxschmitt.me/posts/nextjs-404-page-app-router)
+
 ## Todo
 * Cache fetching of all blog posts.
 * Author page which lists all articles by an author.
