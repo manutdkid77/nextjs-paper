@@ -1,13 +1,16 @@
 import Avatar from "./components/Avatar";
 import siteMetadata from "@/data/siteMetadata";
 import { getAllContentFiles } from "./lib/markdownParser";
-import BlogList from "./components/BlogList";
+import LatestPosts from "./components/LatestPosts";
 
 export default function Home() {
-  let contentFiles = getAllContentFiles({
+  const allContentFiles = getAllContentFiles({
     sourceFolderPath: "data/blogPosts",
     slugPathPrefix: "/blog",
   });
+
+  const NO_OF_POSTS = 3;
+
   return (
     <>
       <Avatar
@@ -15,6 +18,11 @@ export default function Home() {
         description={siteMetadata.description}
         avatarUrl={siteMetadata.avatarUrl}
       ></Avatar>
+      <LatestPosts
+        noOfPostsToDisplay={NO_OF_POSTS}
+        allContentFiles={allContentFiles}
+        readMoreUrl="/blog/page/1"
+      />
     </>
   );
 }
